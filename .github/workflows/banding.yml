@@ -1,0 +1,33 @@
+name: Kirim Email ke WhatsApp Support
+
+on:
+  workflow_dispatch:
+    inputs:
+      phone_number:
+        description: "Nomor WhatsApp (contoh: +6281234567890)"
+        required: true
+      your_name:
+        description: "Nama pengirim"
+        required: true
+        default: "Mateus"
+
+jobs:
+  send_email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Kirim Email ke WhatsApp Support
+        env:
+          EMAIL_SENDER: ${{ secrets.EMAIL_SENDER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_RECEIVER: android@support.whatsapp.com
+          PHONE_NUMBER: ${{ github.event.inputs.phone_number }}
+          YOUR_NAME: ${{ github.event.inputs.your_name }}
+        run: python send_whatsapp.py
