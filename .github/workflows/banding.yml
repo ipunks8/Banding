@@ -30,4 +30,4 @@ jobs:
           EMAIL_RECEIVER: android@support.whatsapp.com
           PHONE_NUMBER: ${{ github.event.inputs.phone_number }}
           YOUR_NAME: ${{ github.event.inputs.your_name }}
-        run: python send_whatsapp.py
+        run: python banding.py
